@@ -5,6 +5,7 @@
  */
 package przychodnia;
 
+import hibernate.HibernateUtil;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,11 @@ public class Przychodnia extends Application {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+    
+    @Override
+    public void stop() throws Exception {
+        HibernateUtil.getSessionFactory().close();
     }
     
 

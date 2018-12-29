@@ -17,6 +17,7 @@
     <RowConstraints maxHeight="200.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="363.0" minHeight="10.0" prefHeight="363.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints />
   </rowConstraints>
    <children>
       <MenuBar GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.valignment="TOP">
@@ -40,8 +41,9 @@
       </MenuBar>
       <TextField fx:id="imieadd" promptText="Imie" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BASELINE" />
       <TextField fx:id="nazwiskoadd" promptText="Nazwisko" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField fx:id="wiekadd" promptText="Wiek" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
       <Button fx:id="pacjentadd" mnemonicParsing="false" onAction="#pacjentadd" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextArea fx:id="pacjentdisp" prefHeight="428.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.rowSpan="3" />
+      <TextArea fx:id="pacjentdisp" prefHeight="428.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+      <Button fx:id="pacjentdel" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+      <DatePicker fx:id="wiekadd" promptText="Data Urodzenia" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
    </children>
 </GridPane>

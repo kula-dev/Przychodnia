@@ -23,4 +23,13 @@ public class PacjentMySQL {
         tx.commit();
         session.close();
     }
+    
+    public static void delete(Pacjent e){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        session.delete(e);
+        tx.commit();
+        session.close();
+    }
+    
 }

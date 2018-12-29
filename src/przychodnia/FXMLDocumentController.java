@@ -15,6 +15,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -32,11 +33,13 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField nazwiskoadd;
     @FXML
-    private TextField wiekadd;
+    private DatePicker wiekadd;
     @FXML
     private TextArea pacjentdisp;
     @FXML
     private Button pacjentadd;
+    @FXML
+    private Button pacjentdel;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -50,8 +53,15 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void pacjentadd(ActionEvent event) {
-        p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getText()));
-        pmysql.insert(p);
+        if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null)
+        {
+            System.out.println("wypełnij wszystkie pola");
+        }
+        else
+        {
+            p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()));
+            pmysql.insert(p);
+        }
         //pacjentdisp.appendText(k.pacjenci.toString());
         //pacjentdisp.setText(k.writepacjenci());
     }
