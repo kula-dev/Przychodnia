@@ -20,7 +20,6 @@ public class Przychodnia extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        Pacjenci k = new Pacjenci();
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
         
         Scene scene = new Scene(root);

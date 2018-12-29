@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-12-29 17:40:39 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="przychodnia.Pacjent" table="pacjent" catalog="przychodnia" optimistic-lock="version">
+        <id name="idPacjent" type="java.lang.Integer">
+            <column name="id_pacjent" />
+            <generator class="identity" />
+        </id>
+        <property name="imie" type="string">
+            <column name="imie" length="40" not-null="true" />
+        </property>
+        <property name="nazwisko" type="string">
+            <column name="nazwisko" length="40" not-null="true" />
+        </property>
+        <property name="dataUr" type="date">
+            <column name="data_ur" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

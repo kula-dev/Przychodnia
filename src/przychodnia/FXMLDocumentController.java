@@ -5,7 +5,10 @@
  */
 package przychodnia;
 
+import hibernate.*;
 import java.net.URL;
+import java.sql.Date;
+import java.text.DateFormat;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -21,7 +24,8 @@ import javafx.scene.control.TextField;
  * @author Soprano
  */
 public class FXMLDocumentController implements Initializable {
-    Pacjenci k = new Pacjenci();
+    Pacjent p;
+    PacjentMySQL pmysql;
     
     @FXML
     private TextField imieadd;
@@ -46,8 +50,9 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void pacjentadd(ActionEvent event) {
-        k.addpacjenci(imieadd.getText(), nazwiskoadd.getText(), Integer.parseInt(wiekadd.getText()));
+        p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getText()));
+        pmysql.insert(p);
         //pacjentdisp.appendText(k.pacjenci.toString());
-        pacjentdisp.setText(k.writepacjenci());
+        //pacjentdisp.setText(k.writepacjenci());
     }
 }
