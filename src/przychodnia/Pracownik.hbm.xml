@@ -3,9 +3,9 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 2018-12-30 17:11:20 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="przychodnia.Pacjent" table="pacjent" catalog="przychodnia" optimistic-lock="version">
-        <id name="idPacjent" type="java.lang.Integer">
-            <column name="id_pacjent" />
+    <class name="przychodnia.Pracownik" table="pracownik" catalog="przychodnia" optimistic-lock="version">
+        <id name="idPracownik" type="java.lang.Integer">
+            <column name="id_pracownik" />
             <generator class="identity" />
         </id>
         <property name="imie" type="string">
@@ -14,23 +14,14 @@
         <property name="nazwisko" type="string">
             <column name="nazwisko" length="40" not-null="true" />
         </property>
-        <property name="dataUr" type="date">
-            <column name="data_ur" length="10" not-null="true" />
-        </property>
-        <property name="pesel" type="int">
-            <column name="pesel" not-null="true" />
+        <property name="rola" type="string">
+            <column name="rola" length="40" not-null="true" />
         </property>
         <set name="wizyties" table="wizyty" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="id_pacjent" not-null="true" />
+                <column name="id_pracownik" not-null="true" />
             </key>
             <one-to-many class="przychodnia.Wizyty" />
-        </set>
-        <set name="pacjentkartas" table="pacjentkarta" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_pacjent" not-null="true" />
-            </key>
-            <one-to-many class="przychodnia.Pacjentkarta" />
         </set>
     </class>
 </hibernate-mapping>

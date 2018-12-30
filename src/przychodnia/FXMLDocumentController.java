@@ -33,13 +33,14 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private TextField nazwiskoadd;
     @FXML
+    private TextField peseladd;
+    @FXML
     private DatePicker wiekadd;
     @FXML
     private TextArea pacjentdisp;
     @FXML
     private Button pacjentadd;
-    @FXML
-    private Button pacjentdel;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,13 +54,13 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void pacjentadd(ActionEvent event) {
-        if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null)
+        if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null || peseladd.getText() == null)
         {
             System.out.println("wypełnij wszystkie pola");
         }
         else
         {
-            p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()));
+            p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()), Integer.parseInt(peseladd.getText()));
             pmysql.insert(p);
         }
         //pacjentdisp.appendText(k.pacjenci.toString());

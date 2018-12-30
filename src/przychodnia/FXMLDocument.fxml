@@ -43,7 +43,7 @@
       <TextField fx:id="nazwiskoadd" promptText="Nazwisko" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <Button fx:id="pacjentadd" mnemonicParsing="false" onAction="#pacjentadd" text="Button" GridPane.columnIndex="1" GridPane.rowIndex="3" />
       <TextArea fx:id="pacjentdisp" prefHeight="428.0" prefWidth="360.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-      <Button fx:id="pacjentdel" mnemonicParsing="false" text="Button" GridPane.columnIndex="2" GridPane.rowIndex="3" />
       <DatePicker fx:id="wiekadd" promptText="Data Urodzenia" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
+      <TextField fx:id="peseladd" promptText="pesel" GridPane.columnIndex="2" GridPane.rowIndex="3" />
    </children>
 </GridPane>

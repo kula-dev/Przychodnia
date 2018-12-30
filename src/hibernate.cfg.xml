@@ -45,6 +45,10 @@ Contributor(s):
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/przychodnia?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
+    <mapping resource="przychodnia/Pracownik.hbm.xml"/>
+    <mapping resource="przychodnia/Wizyty.hbm.xml"/>
     <mapping resource="przychodnia/Pacjent.hbm.xml"/>
+    <mapping resource="przychodnia/Karta.hbm.xml"/>
+    <mapping resource="przychodnia/Pacjentkarta.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

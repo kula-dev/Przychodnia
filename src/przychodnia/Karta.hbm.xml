@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-12-30 17:11:20 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="przychodnia.Karta" table="karta" catalog="przychodnia" optimistic-lock="version">
+        <id name="idKarta" type="java.lang.Integer">
+            <column name="id_karta" />
+            <generator class="identity" />
+        </id>
+        <property name="choroba" type="string">
+            <column name="choroba" length="40" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="opis" not-null="true" />
+        </property>
+        <set name="pacjentkartas" table="pacjentkarta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_karta" not-null="true" />
+            </key>
+            <one-to-many class="przychodnia.Pacjentkarta" />
+        </set>
+    </class>
+</hibernate-mapping>

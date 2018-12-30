@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2018-12-30 17:11:20 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="przychodnia.Wizyty" table="wizyty" catalog="przychodnia" optimistic-lock="version">
+        <id name="idWizyty" type="java.lang.Integer">
+            <column name="id_wizyty" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="pacjent" class="przychodnia.Pacjent" fetch="select">
+            <column name="id_pacjent" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pracownik" class="przychodnia.Pracownik" fetch="select">
+            <column name="id_pracownik" not-null="true" />
+        </many-to-one>
+        <property name="dataWiz" type="date">
+            <column name="data_wiz" length="10" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
