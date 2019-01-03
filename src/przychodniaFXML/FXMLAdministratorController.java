@@ -67,6 +67,7 @@ public class FXMLAdministratorController implements Initializable {
     private AnchorPane paneedit;
     
     //tabelka widoku
+    @FXML
     private TableView<Pracownik> tablepracownik = new TableView<Pracownik>();
     @FXML
     private TableColumn<Pracownik, String> colimie;
@@ -88,8 +89,6 @@ public class FXMLAdministratorController implements Initializable {
     private PasswordField edithaslo;
     
 
-
-
     /**
      * Initializes the controller class.
      */
@@ -102,6 +101,7 @@ public class FXMLAdministratorController implements Initializable {
         colnazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
         colrola.setCellValueFactory(new PropertyValueFactory<>("rola"));
         colid.setCellValueFactory(new PropertyValueFactory<>("idPracownik"));
+        pracownikviewshow();
     }   
     
     //przyciski menu
