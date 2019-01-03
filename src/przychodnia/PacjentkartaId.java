@@ -1,5 +1,5 @@
 package przychodnia;
-// Generated 2018-12-30 17:11:20 by Hibernate Tools 4.3.1
+// Generated 2019-01-03 14:28:49 by Hibernate Tools 4.3.1
 
 
 

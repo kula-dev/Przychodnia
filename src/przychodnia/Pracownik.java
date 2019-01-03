@@ -1,5 +1,5 @@
 package przychodnia;
-// Generated 2018-12-30 17:11:20 by Hibernate Tools 4.3.1
+// Generated 2019-01-03 14:28:49 by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -15,21 +15,27 @@ public class Pracownik  implements java.io.Serializable {
      private String imie;
      private String nazwisko;
      private String rola;
+     private String login;
+     private String haslo;
      private Set wizyties = new HashSet(0);
 
     public Pracownik() {
     }
 
 	
-    public Pracownik(String imie, String nazwisko, String rola) {
+    public Pracownik(String imie, String nazwisko, String rola, String login, String haslo) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.rola = rola;
+        this.login = login;
+        this.haslo = haslo;
     }
-    public Pracownik(String imie, String nazwisko, String rola, Set wizyties) {
+    public Pracownik(String imie, String nazwisko, String rola, String login, String haslo, Set wizyties) {
        this.imie = imie;
        this.nazwisko = nazwisko;
        this.rola = rola;
+       this.login = login;
+       this.haslo = haslo;
        this.wizyties = wizyties;
     }
    
@@ -61,6 +67,20 @@ public class Pracownik  implements java.io.Serializable {
     public void setRola(String rola) {
         this.rola = rola;
     }
+    public String getLogin() {
+        return this.login;
+    }
+    
+    public void setLogin(String login) {
+        this.login = login;
+    }
+    public String getHaslo() {
+        return this.haslo;
+    }
+    
+    public void setHaslo(String haslo) {
+        this.haslo = haslo;
+    }
     public Set getWizyties() {
         return this.wizyties;
     }
@@ -71,6 +91,10 @@ public class Pracownik  implements java.io.Serializable {
 
 
 
+    @Override
+    public String toString(){
+        return imie + " " + nazwisko;
+    }
 
 }
 
