@@ -24,6 +24,14 @@ public class PracownikMySQL {
         session.close();
     }
     
+    public static void update(Pracownik e){
+        session = HibernateUtil.getSessionFactory().openSession();
+        Transaction tx = session.beginTransaction();
+        session.update(e);
+        tx.commit();
+        session.close();
+    }
+    
     public static void delete(Pracownik e){
         session = HibernateUtil.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();

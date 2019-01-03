@@ -57,11 +57,16 @@ public class FXMLAdministratorController implements Initializable {
     private PasswordField hasloadd;
     @FXML
     private Label alertaddpola;
+    
+    //panele słoneczne
     @FXML
     private AnchorPane paneadd;
     @FXML
     private AnchorPane paneview;
     @FXML
+    private AnchorPane paneedit;
+    
+    //tabelka widoku
     private TableView<Pracownik> tablepracownik = new TableView<Pracownik>();
     @FXML
     private TableColumn<Pracownik, String> colimie;
@@ -71,6 +76,17 @@ public class FXMLAdministratorController implements Initializable {
     private TableColumn<Pracownik, String> colrola;
     @FXML
     private TableColumn<Pracownik, String> colid;
+    
+    //edycja
+    @FXML
+    private TextField editimie;
+    @FXML
+    private TextField editnazwisko;
+    @FXML
+    private TextField editlogin;
+    @FXML
+    private PasswordField edithaslo;
+    
 
 
 
@@ -98,6 +114,7 @@ public class FXMLAdministratorController implements Initializable {
     @FXML
     private void pracownikview(ActionEvent event) {
         paneadd.setVisible(false);
+        paneedit.setVisible(false);
         paneview.setVisible(true);
         
         pracownikviewshow();
@@ -110,7 +127,9 @@ public class FXMLAdministratorController implements Initializable {
 
     @FXML
     private void pracownikaddmenu(ActionEvent event) {
-        
+        paneedit.setVisible(false);
+        paneview.setVisible(false);
+        paneadd.setVisible(true);
     }
     
     //button'y
@@ -143,11 +162,6 @@ public class FXMLAdministratorController implements Initializable {
         }
     }
 
-    @FXML
-    private void pracownikclick(MouseEvent event) {
-        //System.out.println(tablepracownik.);
-    }
-
     private void pracownikviewshow(){
         tablepracownik.getItems().clear();
         session = HibernateUtil.getSessionFactory().openSession();
@@ -162,6 +176,43 @@ public class FXMLAdministratorController implements Initializable {
         }
         session.close();
     }
-            
     
+    @FXML
+    private void editpracownik(ActionEvent event) {
+        if(tablepracownik.getSelectionModel().isEmpty())
+        {
+            
+        }
+        else
+        {
+            paneview.setVisible(false);
+            paneadd.setVisible(false);
+            paneedit.setVisible(true);
+            editimie.setText(tablepracownik.getSelectionModel().getSelectedItem().getImie());
+            editnazwisko.setText(tablepracownik.getSelectionModel().getSelectedItem().getNazwisko());
+            editlogin.setText(tablepracownik.getSelectionModel().getSelectedItem().getLogin());
+            edithaslo.setText(tablepracownik.getSelectionModel().getSelectedItem().getHaslo());
+            p = tablepracownik.getSelectionModel().getSelectedItem();
+        }
+    }
+
+    @FXML
+    private void editimienaz(ActionEvent event) {
+        p.setImie(editimie.getText());
+        p.setNazwisko(editnazwisko.getText());
+        pmysql.update(p);
+    }
+
+    @FXML
+    private void editloghas(ActionEvent event) {
+        p.setLogin(editlogin.getText());
+        p.setHaslo(edithaslo.getText());
+        pmysql.update(p);
+    }
+
+    @FXML
+    private void pracownikclick(MouseEvent event) {
+    }
+
+
 }
