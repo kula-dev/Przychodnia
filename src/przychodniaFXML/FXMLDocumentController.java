@@ -110,13 +110,14 @@ public class FXMLDocumentController implements Initializable {
                 System.out.println(p);
                 session.close();
                 AnchorPane pane;
+                System.out.println(p.getRola().equals("Admin"));
                 
-                if(p.getRola() == "Admin")
+                if(p.getRola().equals("Admin"))
                     pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
-                else if(p.getRola() == "Lekarz")
+                else if(p.getRola().equals("Lekarz"))
                     pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
                 else
-                    pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
+                    pane = FXMLLoader.load(getClass().getResource("FXMLPielegniarka.fxml"));
                 
                 //AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
                 rootpane.getChildren().setAll(pane);
