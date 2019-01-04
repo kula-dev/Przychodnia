@@ -21,7 +21,6 @@
           <Menu mnemonicParsing="false" text="Edit">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#pracownikview" text="Zobacz pracowników" />
-                  <MenuItem mnemonicParsing="false" onAction="#pracowniksearch" text="Wyszukaj pracownika" />
                   <MenuItem mnemonicParsing="false" onAction="#pracownikaddmenu" text="Dodaj pracownika" />
             </items>
           </Menu>
@@ -54,7 +53,7 @@
          </children></AnchorPane>
       <AnchorPane fx:id="paneview" layoutX="160.0" layoutY="103.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <children>
-            <TableView fx:id="tablepracownik" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tablepracownik" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="colimie" prefWidth="200.0" text="Imię" />
                 <TableColumn fx:id="colnazwisko" prefWidth="200.0" text="Nazwisko" />
@@ -64,6 +63,11 @@
             </TableView>
             <Button layoutX="653.0" layoutY="54.0" mnemonicParsing="false" onAction="#pracownikdel" text="Usuń" AnchorPane.rightAnchor="14.0" />
             <Button layoutX="642.0" layoutY="14.0" mnemonicParsing="false" onAction="#editpracownik" text="Edytuj" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="413.0" text="Wyszukiwanie:" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+            <TextField fx:id="imiesearch" layoutX="110.0" layoutY="408.0" prefWidth="131.0" promptText="imie" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="110.0" />
+            <TextField fx:id="nazwiskosearch" layoutX="241.0" layoutY="408.0" prefWidth="131.0" promptText="nazwisko" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0" />
+            <ComboBox fx:id="rolasearch" layoutX="378.0" layoutY="408.0" prefWidth="150.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="378.0" />
+            <Button layoutX="534.0" layoutY="408.0" mnemonicParsing="false" onAction="#pracowniksearch" prefHeight="31.0" prefWidth="66.0" text="Szukaj" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="534.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneedit" layoutX="214.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="32.0">

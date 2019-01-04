@@ -87,6 +87,12 @@ public class FXMLAdministratorController implements Initializable {
     private TextField editlogin;
     @FXML
     private PasswordField edithaslo;
+    @FXML
+    private TextField imiesearch;
+    @FXML
+    private TextField nazwiskosearch;
+    @FXML
+    private ComboBox<String> rolasearch;
     
 
     /**
@@ -95,8 +101,11 @@ public class FXMLAdministratorController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         rola.getItems().clear();
-        rola.getItems().addAll("Lelarz", "Pielegniarka");
-        rola.getSelectionModel().select("Lelarz");
+        rola.getItems().addAll("Lekarz", "Pielegniarka");
+        rola.getSelectionModel().select("Lekarz");
+        rolasearch.getItems().clear();
+        rolasearch.getItems().addAll("Wszyscy", "Lekarz", "Pielegniarka");
+        rolasearch.getSelectionModel().select("Wszyscy");
         colimie.setCellValueFactory(new PropertyValueFactory<>("imie"));
         colnazwisko.setCellValueFactory(new PropertyValueFactory<>("nazwisko"));
         colrola.setCellValueFactory(new PropertyValueFactory<>("rola"));
@@ -122,7 +131,29 @@ public class FXMLAdministratorController implements Initializable {
 
     @FXML
     private void pracowniksearch(ActionEvent event) {
+        String rola = "";
+        tablepracownik.getItems().clear();
+        session = HibernateUtil.getSessionFactory().openSession();
+        if(rolasearch.getValue() == "Wszyscy")
+            rola = "";
+        else
+            rola = rolasearch.getValue();
+        System.out.println(rola);
+        String hql = "SELECT P.id FROM Pracownik P WHERE"
+                + "  P.imie LIKE '%" + imiesearch.getText() + "%' AND"
+                + " P.nazwisko LIKE '%" + nazwiskosearch.getText() + "%' AND"
+                + " P.rola LIKE '%" + rola + "%' AND"
+                + " P.rola NOT LIKE 'Admin'";
+        System.out.println(hql);
+        Query query = session.createQuery(hql);
+        List results = query.list();
         
+        for(int i = 0; i < results.size(); i++)
+        {
+            p = (Pracownik) session.get(Pracownik.class, (Integer)query.list().get(i));
+            tablepracownik.getItems().add(p);
+        }
+        session.close();
     }
 
     @FXML
@@ -165,7 +196,8 @@ public class FXMLAdministratorController implements Initializable {
     private void pracownikviewshow(){
         tablepracownik.getItems().clear();
         session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "SELECT P.id FROM Pracownik P WHERE P.rola = 'Pielegniarka'";
+        String hql = "SELECT P.id FROM Pracownik P "
+                + "WHERE P.rola = 'Pielegniarka' OR P.rola = 'Lekarz'";
         Query query = session.createQuery(hql);
         List results = query.list();
         
@@ -210,9 +242,6 @@ public class FXMLAdministratorController implements Initializable {
         pmysql.update(p);
     }
 
-    @FXML
-    private void pracownikclick(MouseEvent event) {
-    }
 
 
 }
