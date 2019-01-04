@@ -127,6 +127,8 @@ public class FXMLPielegniarkaController implements Initializable {
     private DatePicker datauredit;
     @FXML
     private TextField peseledit;
+    
+    //dodawanie pacjenta
     @FXML
     private AnchorPane paneadd;
     @FXML
