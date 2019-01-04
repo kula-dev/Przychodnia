@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 2019-01-03 14:28:49 by Hibernate Tools 4.3.1 -->
+<!-- Generated 2019-01-04 14:24:15 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="przychodnia.Karta" table="karta" catalog="przychodnia" optimistic-lock="version">
         <id name="idKarta" type="java.lang.Integer">

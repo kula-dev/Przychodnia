@@ -1,5 +1,5 @@
 package przychodnia;
-// Generated 2019-01-03 14:28:49 by Hibernate Tools 4.3.1
+// Generated 2019-01-04 14:24:14 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -16,7 +16,7 @@ public class Pacjent  implements java.io.Serializable {
      private String imie;
      private String nazwisko;
      private Date dataUr;
-     private int pesel;
+     private long pesel;
      private Set wizyties = new HashSet(0);
      private Set pacjentkartas = new HashSet(0);
 
@@ -24,13 +24,13 @@ public class Pacjent  implements java.io.Serializable {
     }
 
 	
-    public Pacjent(String imie, String nazwisko, Date dataUr, int pesel) {
+    public Pacjent(String imie, String nazwisko, Date dataUr, long pesel) {
         this.imie = imie;
         this.nazwisko = nazwisko;
         this.dataUr = dataUr;
         this.pesel = pesel;
     }
-    public Pacjent(String imie, String nazwisko, Date dataUr, int pesel, Set wizyties, Set pacjentkartas) {
+    public Pacjent(String imie, String nazwisko, Date dataUr, long pesel, Set wizyties, Set pacjentkartas) {
        this.imie = imie;
        this.nazwisko = nazwisko;
        this.dataUr = dataUr;
@@ -67,11 +67,11 @@ public class Pacjent  implements java.io.Serializable {
     public void setDataUr(Date dataUr) {
         this.dataUr = dataUr;
     }
-    public int getPesel() {
+    public long getPesel() {
         return this.pesel;
     }
     
-    public void setPesel(int pesel) {
+    public void setPesel(long pesel) {
         this.pesel = pesel;
     }
     public Set getWizyties() {

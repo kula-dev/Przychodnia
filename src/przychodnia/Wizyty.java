@@ -1,5 +1,5 @@
 package przychodnia;
-// Generated 2019-01-03 14:28:49 by Hibernate Tools 4.3.1
+// Generated 2019-01-04 14:24:14 by Hibernate Tools 4.3.1
 
 
 import java.util.Date;

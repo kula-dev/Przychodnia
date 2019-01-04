@@ -41,9 +41,9 @@ Contributor(s):
 -->
 <hibernate-reverse-engineering>
   <schema-selection match-catalog="przychodnia"/>
-  <table-filter match-name="wizyty"/>
+  <table-filter match-name="pacjent"/>
   <table-filter match-name="pacjentkarta"/>
+  <table-filter match-name="wizyty"/>
   <table-filter match-name="pracownik"/>
   <table-filter match-name="karta"/>
-  <table-filter match-name="pacjent"/>
 </hibernate-reverse-engineering>
