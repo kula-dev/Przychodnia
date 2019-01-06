@@ -60,28 +60,13 @@ public class FXMLDocumentController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        session = HibernateUtil.getSessionFactory().openSession();
+        session = null;
     }    
 
     private void close(ActionEvent event) {
         Platform.exit();
     }
-    
-
-//    @FXML
-//    private void pacjentadd(ActionEvent event) {
-//        if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null || peseladd.getText() == null)
-//        {
-//            System.out.println("wypełnij wszystkie pola");
-//        }
-//        else
-//        {
-//            p = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()), Integer.parseInt(peseladd.getText()));
-//            pmysql.insert(p);
-//        }
-//        //pacjentdisp.appendText(k.pacjenci.toString());
-//        //pacjentdisp.setText(k.writepacjenci());
-//    }
 
     @FXML
     private void log(ActionEvent event) throws Exception {
@@ -115,7 +100,10 @@ public class FXMLDocumentController implements Initializable {
                 if(p.getRola().equals("Admin"))
                     pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
                 else if(p.getRola().equals("Lekarz"))
-                    pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));
+                {
+                    Globalne.idpra = String.valueOf(p.getIdPracownik());
+                    pane = FXMLLoader.load(getClass().getResource("FXMLLekarz.fxml"));
+                }
                 else
                     pane = FXMLLoader.load(getClass().getResource("FXMLPielegniarka.fxml"));
                 

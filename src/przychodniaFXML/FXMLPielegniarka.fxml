@@ -30,7 +30,7 @@
           </Menu>
         </menus>
       </MenuBar>
-      <AnchorPane fx:id="paneview" layoutX="14.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <AnchorPane fx:id="paneview" layoutX="14.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <children>
             <TableView fx:id="tablepacjent" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
                <columns>
@@ -120,7 +120,7 @@
             </TabPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="paneadd" layoutX="184.0" layoutY="156.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+      <AnchorPane fx:id="paneadd" layoutX="184.0" layoutY="156.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
          <children>
             <Label layoutX="14.0" layoutY="14.0" text="Dodawanie pacjenta" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
                <font>

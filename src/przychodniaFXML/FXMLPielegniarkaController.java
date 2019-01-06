@@ -184,6 +184,8 @@ public class FXMLPielegniarkaController implements Initializable {
         }
         else
         {
+            pa = tablepacjent.getSelectionModel().getSelectedItem();
+            wizytyshow();
             paneview.setVisible(false);
             paneadd.setVisible(false);
             paneshow.setVisible(true);
@@ -191,7 +193,6 @@ public class FXMLPielegniarkaController implements Initializable {
             pacjentnazwisko.setText(tablepacjent.getSelectionModel().getSelectedItem().getNazwisko());
             pacjentdataur.setText(String.valueOf(tablepacjent.getSelectionModel().getSelectedItem().getDataUr()));
             pacjentpesel.setText(String.valueOf(tablepacjent.getSelectionModel().getSelectedItem().getPesel()));
-            pa = tablepacjent.getSelectionModel().getSelectedItem();
         }
     }
     
@@ -233,6 +234,7 @@ public class FXMLPielegniarkaController implements Initializable {
         paneshow.setVisible(false);
         paneview.setVisible(true);
         pacjentviewshow();
+        wizytyshow();
     }
 
     @FXML
@@ -319,7 +321,9 @@ public class FXMLPielegniarkaController implements Initializable {
     private void wizytyshow(){
         tablewizyty.getItems().clear();
         session = HibernateUtil.getSessionFactory().openSession();
-        String hql = "SELECT W.id FROM Wizyty W, Pacjent P WHERE P.id = '" + pa.getIdPacjent() + "'";
+        //String hql = "SELECT W.id FROM Wizyty W, Pacjent P WHERE P.id = '" + pa.getIdPacjent() + "'";
+        
+        String hql = "SELECT W.id FROM Wizyty W WHERE W.pacjent = '" + pa.getIdPacjent() + "'";
         
         Query query = session.createQuery(hql);
         List results = query.list();
@@ -327,7 +331,7 @@ public class FXMLPielegniarkaController implements Initializable {
         for(int i = 0; i < results.size(); i++)
         {
             wiz = (Wizyty) session.get(Wizyty.class, (Integer)query.list().get(i));
-            System.out.println(wiz.getPracownik());
+            //System.out.println(wiz.getPracownik());
             tablewizyty.getItems().add(wiz);
         }
         session.close();

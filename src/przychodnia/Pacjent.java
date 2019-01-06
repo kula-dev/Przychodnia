@@ -89,7 +89,13 @@ public class Pacjent  implements java.io.Serializable {
         this.pacjentkartas = pacjentkartas;
     }
 
-
+    @Override
+    public String toString(){
+        return "Imię: " + this.imie + System.lineSeparator()
+                + "Nazwisko: " + this.nazwisko + System.lineSeparator()
+                + "Data ur: " + this.dataUr + System.lineSeparator()
+                + "Pesel: " + this.pesel;
+    }
 
 
 }

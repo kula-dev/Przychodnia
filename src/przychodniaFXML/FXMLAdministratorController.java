@@ -138,13 +138,13 @@ public class FXMLAdministratorController implements Initializable {
             rola = "";
         else
             rola = rolasearch.getValue();
-        System.out.println(rola);
+
         String hql = "SELECT P.id FROM Pracownik P WHERE"
                 + "  P.imie LIKE '%" + imiesearch.getText() + "%' AND"
                 + " P.nazwisko LIKE '%" + nazwiskosearch.getText() + "%' AND"
                 + " P.rola LIKE '%" + rola + "%' AND"
                 + " P.rola NOT LIKE 'Admin'";
-        System.out.println(hql);
+
         Query query = session.createQuery(hql);
         List results = query.list();
         
@@ -180,14 +180,12 @@ public class FXMLAdministratorController implements Initializable {
 
     @FXML
     private void pracownikdel(ActionEvent event) {
-        //System.out.println(tablepracownik.getSelectionModel().getSelectedCells().get(0));
         if(tablepracownik.getSelectionModel().isEmpty())
         {
             
         }
         else
         {
-            System.out.println(tablepracownik.getSelectionModel().getSelectedItem());
             pmysql.delete(tablepracownik.getSelectionModel().getSelectedItem());
             pracownikviewshow();
         }

@@ -5,10 +5,13 @@
  */
 package przychodnia;
 
+import java.util.Set;
+
 /**
  *
  * @author Soprano
  */
 public class Globalne {
-    private static Integer id;
+    public static String idpra;
+    
 }
