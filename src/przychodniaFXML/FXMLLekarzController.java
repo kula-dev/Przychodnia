@@ -8,12 +8,17 @@ package przychodniaFXML;
 import hibernate.HibernateUtil;
 import hibernate.KartaMySQL;
 import hibernate.PacjentkartaMySQL;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -26,6 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import przychodnia.Globalne;
@@ -102,6 +108,18 @@ public class FXMLLekarzController implements Initializable {
     private TextField wpisnazadd;
     @FXML
     private TextArea wpisopisadd;
+    @FXML
+    private AnchorPane paneadd;
+    @FXML
+    private TextField choreditnaz;
+    @FXML
+    private TextArea choreditopis;
+    @FXML
+    private Label alertedit;
+    @FXML
+    private Label alertdel;
+    @FXML
+    private Label alertwpisadd;
 
     /**
      * Initializes the controller class.
@@ -161,6 +179,7 @@ public class FXMLLekarzController implements Initializable {
         }
         else
         {
+            paneadd.setVisible(false);
             panewizytyshow.setVisible(false);
             panepacjent.setVisible(true);
             pa = tablewizytyshow.getSelectionModel().getSelectedItem().getPacjent();
@@ -191,7 +210,17 @@ public class FXMLLekarzController implements Initializable {
             System.out.println(tablechor.getSelectionModel().getSelectedItem());
             karmysql.delete(tablechor.getSelectionModel().getSelectedItem());
             chorobyshow();
+            alert(alertdel);
         }
+    }
+    
+    private void alert(Label a){
+        a.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));
+        visiblePause.setOnFinished(
+            event -> a.setVisible(false)
+        );
+        visiblePause.play();
     }
     
     private void chorobyshow(){
@@ -221,6 +250,7 @@ public class FXMLLekarzController implements Initializable {
     @FXML
     private void showwiz(ActionEvent event) {
         panepacjent.setVisible(false);
+        paneadd.setVisible(false);
         panewizytyshow.setVisible(true);
     }
 
@@ -241,9 +271,55 @@ public class FXMLLekarzController implements Initializable {
             pkid = new PacjentkartaId(pa.getIdPacjent(), kar.getIdKarta());
             pk = new Pacjentkarta(pkid, kar, pa);
             pkmysql.insert(pk);
-            //karmysql.insert(kar);
+            alert(alertwpisadd);
+            wpisnazadd.clear();
+            wpisopisadd.clear();
+        }
+    }
+
+    @FXML
+    private void choredit(ActionEvent event) {
+        kar.setChoroba(choreditnaz.getText());
+        kar.setOpis(choreditopis.getText());
+        karmysql.update(kar);
+        //alertedit.setVisible(true);
+        alert(alertedit);
+    }
+
+    @FXML
+    private void choreditshow(ActionEvent event) {
+        if(tablechor.getSelectionModel().isEmpty())
+        {
             
         }
+        else
+        {
+            
+            panewizytyshow.setVisible(false);
+            panepacjent.setVisible(false);
+            paneadd.setVisible(true);
+            choreditnaz.setText(tablechor.getSelectionModel().getSelectedItem().getChoroba());
+            choreditopis.setText(tablechor.getSelectionModel().getSelectedItem().getOpis());
+        }
+    }
+
+    @FXML
+    private void chorback(ActionEvent event) {
+        panewizytyshow.setVisible(false);
+        paneadd.setVisible(false);
+        panepacjent.setVisible(true);
+        chorobyshow();
+    }
+
+    @FXML
+    private void logout(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        rootpane.getChildren().setAll(pane);
+    }
+
+    @FXML
+    private void close(ActionEvent event) {
+        Platform.exit();
     }
     
 }

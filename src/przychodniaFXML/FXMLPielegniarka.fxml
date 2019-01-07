@@ -11,13 +11,13 @@
    <children>
       <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
-          <Menu mnemonicParsing="false" text="File">
+          <Menu mnemonicParsing="false" text="Plik">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#logout" text="Wyloguj" />
               <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
             </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
+          <Menu mnemonicParsing="false" text="Edycja">
             <items>
               <MenuItem mnemonicParsing="false" onAction="#pacjentshowall" text="Wyszukaj" />
                   <MenuItem mnemonicParsing="false" onAction="#pacjentadd" text="Dodaj pacjenta" />
@@ -46,8 +46,9 @@
             <Label layoutX="14.0" layoutY="413.0" text="Wyszukiwanie:" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
             <TextField fx:id="imiesearch" layoutX="110.0" layoutY="408.0" prefWidth="131.0" promptText="imie" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="110.0" />
             <TextField fx:id="nazwiskosearch" layoutX="241.0" layoutY="408.0" prefWidth="131.0" promptText="nazwisko" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0" />
-            <Button layoutX="534.0" layoutY="408.0" mnemonicParsing="false" onAction="#pracowniksearch" prefHeight="31.0" prefWidth="66.0" text="Szukaj" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="534.0" />
+            <Button layoutX="534.0" layoutY="408.0" mnemonicParsing="false" onAction="#pacjentsearch" prefHeight="31.0" prefWidth="66.0" text="Szukaj" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="534.0" />
             <TextField fx:id="peselsearch" layoutX="372.0" layoutY="408.0" prefWidth="131.0" promptText="pesel" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="372.0" />
+            <Label fx:id="alertpacdel" layoutX="672.0" layoutY="93.0" text="Usunięto" textFill="RED" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="93.0" />
          </children>
       </AnchorPane>
       <AnchorPane fx:id="paneshow" layoutX="128.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
@@ -97,6 +98,7 @@
                                 </columns>
                               </TableView>
                               <Button layoutX="350.0" layoutY="351.0" mnemonicParsing="false" onAction="#wizytaadd" text="Dodaj" AnchorPane.bottomAnchor="27.0" AnchorPane.rightAnchor="310.0" />
+                              <Label fx:id="alertwizadd" layoutX="415.0" layoutY="356.0" text="Dodano wizytę" textFill="RED" visible="false" AnchorPane.bottomAnchor="32.0" AnchorPane.rightAnchor="206.0" />
                            </children></AnchorPane>
                   </content>
                 </Tab>
@@ -113,6 +115,7 @@
                               <Label layoutX="14.0" layoutY="170.0" text="Pesel:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                               <TextField fx:id="peseledit" layoutX="14.0" layoutY="189.0" promptText="pesel" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
                               <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#pacjentedit" text="Edytuj" AnchorPane.leftAnchor="14.0" />
+                              <Label fx:id="alertpacedit" layoutX="86.0" layoutY="235.0" text="Pacjent zaktualizowany" textFill="RED" visible="false" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="86.0" />
                            </children></AnchorPane>
                     </content>
                   </Tab>
@@ -136,6 +139,7 @@
             <Label layoutX="14.0" layoutY="205.0" text="Pesel:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
             <TextField fx:id="peseladd" layoutX="14.0" layoutY="226.0" promptText="pesel" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
             <Button layoutX="14.0" layoutY="266.0" mnemonicParsing="false" onAction="#addpacjent" text="Dodaj" AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="alertpacadd" layoutX="80.0" layoutY="271.0" text="Dodano pacjenta" textFill="RED" AnchorPane.bottomAnchor="156.0" AnchorPane.leftAnchor="80.0" />
          </children>
       </AnchorPane>
    </children>

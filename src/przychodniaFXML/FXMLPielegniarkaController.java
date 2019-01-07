@@ -19,6 +19,8 @@ import java.sql.SQLData;
 import java.text.DateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -34,6 +36,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import przychodnia.Pacjent;
@@ -139,6 +142,14 @@ public class FXMLPielegniarkaController implements Initializable {
     private DatePicker wiekadd;
     @FXML
     private TextField peseladd;
+    @FXML
+    private Label alertpacdel;
+    @FXML
+    private Label alertwizadd;
+    @FXML
+    private Label alertpacedit;
+    @FXML
+    private Label alertpacadd;
 
     /**
      * Initializes the controller class.
@@ -173,6 +184,7 @@ public class FXMLPielegniarkaController implements Initializable {
             System.out.println(tablepacjent.getSelectionModel().getSelectedItem());
             pamysql.delete(tablepacjent.getSelectionModel().getSelectedItem());
             pacjentviewshow();
+            alert(alertpacdel);
         }
     }
 
@@ -198,9 +210,6 @@ public class FXMLPielegniarkaController implements Initializable {
     
     
 
-    @FXML
-    private void pracowniksearch(ActionEvent event) {
-    }
     
     private void pacjentviewshow(){
         tablepacjent.getItems().clear();
@@ -225,6 +234,7 @@ public class FXMLPielegniarkaController implements Initializable {
 
     @FXML
     private void close(ActionEvent event) {
+        Platform.exit();
     }
 
     @FXML
@@ -235,6 +245,9 @@ public class FXMLPielegniarkaController implements Initializable {
         paneview.setVisible(true);
         pacjentviewshow();
         wizytyshow();
+        imiesearch.clear();
+        nazwiskosearch.clear();
+        peselsearch.clear();
     }
 
     @FXML
@@ -264,6 +277,7 @@ public class FXMLPielegniarkaController implements Initializable {
         pa.setDataUr(Date.valueOf(datauredit.getValue()));
         pa.setPesel(Long.parseLong(peseledit.getText()));
         pamysql.update(pa);
+        alert(alertpacedit);
     }
     
     @FXML
@@ -309,6 +323,9 @@ public class FXMLPielegniarkaController implements Initializable {
             wiz = new Wizyty(pa, tablewizadd.getSelectionModel().getSelectedItem(), Date.valueOf(wizadddata.getValue()));
             wizmysql.insert(wiz);
             wizytyshow();
+            alert(alertwizadd);
+            wizadddata.getEditor().clear();
+            tablewizadd.getSelectionModel().clearSelection();
         }
     }
 
@@ -350,6 +367,36 @@ public class FXMLPielegniarkaController implements Initializable {
             pra = (Pracownik) session.get(Pracownik.class, (Integer)query.list().get(i));
             //System.out.println(wiz.getPracownik());
             tablewizadd.getItems().add(pra);
+        }
+        session.close();
+    }
+    
+    private void alert(Label a){
+        a.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));
+        visiblePause.setOnFinished(
+            event -> a.setVisible(false)
+        );
+        visiblePause.play();
+    }
+
+    @FXML
+    private void pacjentsearch(ActionEvent event) {
+        tablepacjent.getItems().clear();
+        session = HibernateUtil.getSessionFactory().openSession();
+
+        String hql = "SELECT P.id FROM Pacjent P WHERE"
+                + "  P.imie LIKE '%" + imiesearch.getText() + "%' AND"
+                + " P.nazwisko LIKE '%" + nazwiskosearch.getText() + "%' AND"
+                + " P.pesel LIKE '%" + peselsearch.getText() + "%'";
+
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        
+        for(int i = 0; i < results.size(); i++)
+        {
+            pa = (Pacjent) session.get(Pacjent.class, (Integer)query.list().get(i));
+            tablepacjent.getItems().add(pa);
         }
         session.close();
     }

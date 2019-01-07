@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.animation.PauseTransition;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +28,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import przychodnia.Pracownik;
@@ -93,6 +96,14 @@ public class FXMLAdministratorController implements Initializable {
     private TextField nazwiskosearch;
     @FXML
     private ComboBox<String> rolasearch;
+    @FXML
+    private Label alertpraadd;
+    @FXML
+    private Label alertpradel;
+    @FXML
+    private Label alertpraeditdane;
+    @FXML
+    private Label alertpraeditlog;
     
 
     /**
@@ -175,6 +186,12 @@ public class FXMLAdministratorController implements Initializable {
         {
             p = new Pracownik(imieadd.getText(), nazwiskoadd.getText(), rola.getValue(), loginadd.getText(), hasloadd.getText());
             pmysql.insert(p);
+            alert(alertpraadd);
+            alertaddpola.setVisible(false);
+            imieadd.clear();
+            nazwiskoadd.clear();
+            loginadd.clear();
+            hasloadd.clear();
         }
     }
 
@@ -188,6 +205,7 @@ public class FXMLAdministratorController implements Initializable {
         {
             pmysql.delete(tablepracownik.getSelectionModel().getSelectedItem());
             pracownikviewshow();
+            alert(alertpradel);
         }
     }
 
@@ -231,6 +249,7 @@ public class FXMLAdministratorController implements Initializable {
         p.setImie(editimie.getText());
         p.setNazwisko(editnazwisko.getText());
         pmysql.update(p);
+        alert(alertpraeditdane);
     }
 
     @FXML
@@ -238,8 +257,21 @@ public class FXMLAdministratorController implements Initializable {
         p.setLogin(editlogin.getText());
         p.setHaslo(edithaslo.getText());
         pmysql.update(p);
+        alert(alertpraeditlog);
     }
 
+    private void alert(Label a){
+        a.setVisible(true);
+        PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));
+        visiblePause.setOnFinished(
+            event -> a.setVisible(false)
+        );
+        visiblePause.play();
+    }
 
+    @FXML
+    private void close(ActionEvent event) {
+        Platform.exit();
+    }
 
 }

@@ -26,6 +26,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.hibernate.Query;
@@ -111,11 +113,6 @@ public class FXMLDocumentController implements Initializable {
                 rootpane.getChildren().setAll(pane);
             }
         }
-            
-        
-        
-        
-        
-
     }
+
 }
