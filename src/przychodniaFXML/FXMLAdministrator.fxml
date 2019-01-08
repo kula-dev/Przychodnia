@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" fx:id="rootpane" prefHeight="480.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="przychodniaFXML.FXMLAdministratorController">
+   <children>
+      <MenuBar layoutX="94.0" layoutY="78.0" prefHeight="32.0" prefWidth="720.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Plik">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Wyloguj" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edycja">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#pracownikview" text="Zobacz pracowników" />
+                  <MenuItem mnemonicParsing="false" onAction="#pracownikaddmenu" text="Dodaj pracownika" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="paneadd" layoutX="214.0" layoutY="122.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Dodawanie pracownika" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="49.0" text="Imie:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="imieadd" layoutX="14.0" layoutY="70.0" promptText="imie" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="101.0" text="Nazwisko:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="nazwiskoadd" layoutX="14.0" layoutY="122.0" promptText="nazwisko" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="153.0" text="Rola:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <ComboBox fx:id="rola" layoutX="14.0" layoutY="174.0" prefWidth="150.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="205.0" text="login:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="loginadd" layoutX="14.0" layoutY="226.0" promptText="login" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="257.0" text="Hasło:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <PasswordField fx:id="hasloadd" layoutX="14.0" layoutY="278.0" promptText="haslo" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="14.0" layoutY="309.0" mnemonicParsing="false" onAction="#pracownikadd" text="Dodaj pracownika" AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="alertaddpola" layoutX="14.0" layoutY="348.0" text="Wypełnij wszystkie pola!" textFill="RED" visible="false" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label fx:id="alertpraadd" layoutX="161.0" layoutY="314.0" text="Dodano pracownika" textFill="RED" visible="false" AnchorPane.leftAnchor="161.0" AnchorPane.rightAnchor="14.0" />
+         </children></AnchorPane>
+      <AnchorPane fx:id="paneview" layoutX="160.0" layoutY="103.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <TableView fx:id="tablepracownik" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
+              <columns>
+                <TableColumn fx:id="colimie" prefWidth="200.0" text="Imię" />
+                <TableColumn fx:id="colnazwisko" prefWidth="200.0" text="Nazwisko" />
+                  <TableColumn fx:id="colrola" prefWidth="200.0" text="Rola" />
+                  <TableColumn fx:id="colid" prefWidth="75.0" text="id" visible="false" />
+              </columns>
+            </TableView>
+            <Button layoutX="653.0" layoutY="54.0" mnemonicParsing="false" onAction="#pracownikdel" text="Usuń" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="642.0" layoutY="14.0" mnemonicParsing="false" onAction="#editpracownik" text="Edytuj" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="413.0" text="Wyszukiwanie:" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+            <TextField fx:id="imiesearch" layoutX="110.0" layoutY="408.0" prefWidth="131.0" promptText="imie" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="110.0" />
+            <TextField fx:id="nazwiskosearch" layoutX="241.0" layoutY="408.0" prefWidth="131.0" promptText="nazwisko" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0" />
+            <ComboBox fx:id="rolasearch" layoutX="378.0" layoutY="408.0" prefWidth="150.0" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="378.0" />
+            <Button layoutX="534.0" layoutY="408.0" mnemonicParsing="false" onAction="#pracowniksearch" prefHeight="31.0" prefWidth="66.0" text="Szukaj" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="534.0" />
+            <Label fx:id="alertpradel" layoutX="662.0" layoutY="92.0" text="Usunięto" textFill="RED" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="92.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneedit" layoutX="214.0" layoutY="99.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Edycja:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="49.0" text="Imie:" />
+            <TextField fx:id="editimie" layoutX="14.0" layoutY="70.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="13.0" layoutY="101.0" text="Nazwisko:" />
+            <TextField fx:id="editnazwisko" layoutX="14.0" layoutY="122.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="14.0" layoutY="153.0" mnemonicParsing="false" onAction="#editimienaz" text="Zmień" AnchorPane.leftAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="184.0" text="Dane logowania:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="211.0" text="Login:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="editlogin" layoutX="14.0" layoutY="232.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="263.0" text="Hasło:" />
+            <PasswordField fx:id="edithaslo" layoutX="14.0" layoutY="284.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#editloghas" text="Zmień dane logowania" AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="alertpraeditdane" layoutX="85.0" layoutY="158.0" text="Zmieniono dane" textFill="RED" visible="false" AnchorPane.bottomAnchor="269.0" AnchorPane.leftAnchor="85.0" />
+            <Label fx:id="alertpraeditlog" layoutX="14.0" layoutY="353.0" text="Zmieniono dane logowania" textFill="RED" visible="false" AnchorPane.bottomAnchor="74.0" AnchorPane.leftAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

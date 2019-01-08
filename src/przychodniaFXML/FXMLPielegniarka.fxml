@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="rootpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="720.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="przychodniaFXML.FXMLPielegniarkaController">
+   <children>
+      <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu mnemonicParsing="false" text="Plik">
+            <items>
+                  <MenuItem mnemonicParsing="false" onAction="#logout" text="Wyloguj" />
+              <MenuItem mnemonicParsing="false" onAction="#close" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edycja">
+            <items>
+              <MenuItem mnemonicParsing="false" onAction="#pacjentshowall" text="Wyszukaj" />
+                  <MenuItem mnemonicParsing="false" onAction="#pacjentadd" text="Dodaj pacjenta" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <AnchorPane fx:id="paneview" layoutX="14.0" layoutY="51.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <TableView fx:id="tablepacjent" layoutX="14.0" layoutY="14.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="120.0" AnchorPane.topAnchor="0.0">
+               <columns>
+                  <TableColumn fx:id="colimie" prefWidth="170.0" text="Imię" />
+                  <TableColumn fx:id="colnazwisko" prefWidth="170.0" text="Nazwisko" />
+                  <TableColumn fx:id="colpesel" prefWidth="100.0" text="Pesel" />
+                  <TableColumn fx:id="colid" prefWidth="75.0" text="id" visible="false" />
+                  <TableColumn fx:id="coldata" prefWidth="159.0" text="Data urodzenia" />
+               </columns>
+            </TableView>
+            <Button layoutX="653.0" layoutY="54.0" mnemonicParsing="false" onAction="#pacjentdel" text="Usuń" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="642.0" layoutY="14.0" mnemonicParsing="false" onAction="#pacjentshow" text="Zobacz" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="413.0" text="Wyszukiwanie:" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="14.0" />
+            <TextField fx:id="imiesearch" layoutX="110.0" layoutY="408.0" prefWidth="131.0" promptText="imie" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="110.0" />
+            <TextField fx:id="nazwiskosearch" layoutX="241.0" layoutY="408.0" prefWidth="131.0" promptText="nazwisko" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="241.0" />
+            <Button layoutX="534.0" layoutY="408.0" mnemonicParsing="false" onAction="#pacjentsearch" prefHeight="31.0" prefWidth="66.0" text="Szukaj" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="534.0" />
+            <TextField fx:id="peselsearch" layoutX="372.0" layoutY="408.0" prefWidth="131.0" promptText="pesel" AnchorPane.bottomAnchor="9.0" AnchorPane.leftAnchor="372.0" />
+            <Label fx:id="alertpacdel" layoutX="672.0" layoutY="93.0" text="Usunięto" textFill="RED" visible="false" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="93.0" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneshow" layoutX="128.0" layoutY="140.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <TabPane layoutX="57.0" layoutY="57.0" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <tabs>
+                <Tab onSelectionChanged="#pacjentshowpane" text="Dane pacjenta">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Imię:" AnchorPane.leftAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="35.0" text="Nazwisko:" AnchorPane.leftAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="56.0" text="Data Urodzenia" AnchorPane.leftAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="77.0" text="Pesel:" AnchorPane.leftAnchor="14.0" />
+                              <Label fx:id="pacjentiimie" layoutX="136.0" layoutY="14.0" text="Label" AnchorPane.leftAnchor="140.0" />
+                              <Label fx:id="pacjentnazwisko" layoutX="136.0" layoutY="35.0" text="Label" AnchorPane.leftAnchor="140.0" />
+                              <Label fx:id="pacjentdataur" layoutX="136.0" layoutY="56.0" text="Label" AnchorPane.leftAnchor="140.0" />
+                              <Label fx:id="pacjentpesel" layoutX="136.0" layoutY="77.0" text="Label" AnchorPane.leftAnchor="140.0" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                </Tab>
+                <Tab onSelectionChanged="#tabwiz" text="Wizyty">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tablewizyty" layoutX="119.0" layoutY="64.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="400.0" AnchorPane.topAnchor="0.0">
+                                <columns>
+                                  <TableColumn fx:id="colwizdok" prefWidth="180.0" text="Doktor" />
+                                  <TableColumn fx:id="colwizdata" prefWidth="140.0" text="Data wizyty" />
+                                    <TableColumn fx:id="colwizid" prefWidth="75.0" text="wizid" visible="false" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="328.0" layoutY="14.0" mnemonicParsing="false" onAction="#wizytadel" text="Usuń wizytę" AnchorPane.rightAnchor="270.0" AnchorPane.topAnchor="14.0" />
+                              <Label layoutX="350.0" layoutY="45.0" prefHeight="38.0" prefWidth="194.0" text="dodawanie wizyty:" AnchorPane.rightAnchor="176.0" AnchorPane.topAnchor="45.0">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="350.0" layoutY="98.0" text="Data:" AnchorPane.rightAnchor="335.0" AnchorPane.topAnchor="98.0" />
+                              <DatePicker fx:id="wizadddata" layoutX="386.0" layoutY="93.0" prefHeight="31.0" prefWidth="152.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="93.0" />
+                              <TableView fx:id="tablewizadd" layoutX="350.0" layoutY="131.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.rightAnchor="170.0" AnchorPane.topAnchor="131.0">
+                                <columns>
+                                  <TableColumn fx:id="tablewizaddimie" prefWidth="100.0" text="Imię" />
+                                    <TableColumn fx:id="tablewizaddnaz" prefWidth="100.0" text="Nazwisko" />
+                                  <TableColumn fx:id="tablewizaddid" prefWidth="75.0" text="lekarzid" visible="false" />
+                                </columns>
+                              </TableView>
+                              <Button layoutX="350.0" layoutY="351.0" mnemonicParsing="false" onAction="#wizytaadd" text="Dodaj" AnchorPane.rightAnchor="310.0" AnchorPane.topAnchor="351.0" />
+                              <Label fx:id="alertwizadd" layoutX="415.0" layoutY="356.0" text="Dodano wizytę" textFill="RED" visible="false" AnchorPane.rightAnchor="206.0" AnchorPane.topAnchor="356.0" />
+                              <Label fx:id="alertwizdel" layoutX="450.0" layoutY="19.0" text="Usunięto wizytę" textFill="RED" visible="false" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="19.0" />
+                           </children></AnchorPane>
+                  </content>
+                </Tab>
+                  <Tab onSelectionChanged="#pacjenteditshow" text="Edytuj dane">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="14.0" layoutY="14.0" text="Imię:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <TextField fx:id="imieedit" layoutX="14.0" layoutY="35.0" promptText="imię" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="66.0" text="Nazwisko:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <TextField fx:id="nazwiskoedit" layoutX="14.0" layoutY="87.0" promptText="nazwisko" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="118.0" text="Data urodzenia" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <DatePicker fx:id="datauredit" layoutX="14.0" layoutY="139.0" prefHeight="31.0" prefWidth="124.0" AnchorPane.leftAnchor="14.0" />
+                              <Label layoutX="14.0" layoutY="170.0" text="Pesel:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <TextField fx:id="peseledit" layoutX="14.0" layoutY="189.0" promptText="pesel" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+                              <Button layoutX="14.0" layoutY="230.0" mnemonicParsing="false" onAction="#pacjentedit" text="Edytuj" AnchorPane.leftAnchor="14.0" />
+                              <Label fx:id="alertpacedit" layoutX="86.0" layoutY="235.0" text="Pacjent zaktualizowany" textFill="RED" visible="false" AnchorPane.bottomAnchor="153.0" AnchorPane.leftAnchor="86.0" />
+                           </children></AnchorPane>
+                    </content>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="paneadd" layoutX="184.0" layoutY="156.0" prefHeight="200.0" prefWidth="200.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="32.0">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Dodawanie pacjenta" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="14.0" layoutY="49.0" text="Imię:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="imieadd" layoutX="14.0" layoutY="70.0" promptText="imię" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="101.0" text="Nazwisko:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="nazwiskoadd" layoutX="14.0" layoutY="122.0" promptText="nazwisko" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="153.0" text="Data urodzenia:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <DatePicker fx:id="wiekadd" layoutX="14.0" layoutY="174.0" onAction="#peseldata" prefHeight="31.0" prefWidth="131.0" AnchorPane.leftAnchor="14.0" />
+            <Label layoutX="14.0" layoutY="205.0" text="Pesel:" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <TextField fx:id="peseladd" layoutX="14.0" layoutY="226.0" promptText="pesel" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="14.0" />
+            <Button layoutX="14.0" layoutY="266.0" mnemonicParsing="false" onAction="#addpacjent" text="Dodaj" AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="alertpacadd" layoutX="80.0" layoutY="271.0" text="Dodano pacjenta" textFill="RED" visible="false" AnchorPane.leftAnchor="80.0" />
+            <Label fx:id="alertpeseladd" layoutX="14.0" layoutY="304.0" text="Nie prawidłowy pesel" textFill="RED" visible="false" AnchorPane.leftAnchor="14.0" />
+            <Label fx:id="alertpacpola" layoutX="14.0" layoutY="304.0" text="Wypełnij wszystkie pola!" textFill="RED" visible="false" AnchorPane.leftAnchor="14.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

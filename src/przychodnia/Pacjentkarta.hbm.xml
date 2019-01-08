@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2019-01-04 14:24:15 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="przychodnia.Pacjentkarta" table="pacjentkarta" catalog="przychodnia" optimistic-lock="version">
+        <composite-id name="id" class="przychodnia.PacjentkartaId">
+            <key-property name="idPacjent" type="int">
+                <column name="id_pacjent" />
+            </key-property>
+            <key-property name="idKarta" type="int">
+                <column name="id_karta" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="karta" class="przychodnia.Karta" update="false" insert="false" fetch="select">
+            <column name="id_karta" not-null="true" />
+        </many-to-one>
+        <many-to-one name="pacjent" class="przychodnia.Pacjent" update="false" insert="false" fetch="select">
+            <column name="id_pacjent" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

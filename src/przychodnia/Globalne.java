@@ -5,14 +5,14 @@
  */
 package przychodnia;
 
+import java.util.Set;
+import javafx.scene.layout.AnchorPane;
+
 /**
  *
  * @author Soprano
  */
-public class lekarz extends Osoba {
-    
-    public lekarz(String imie, String nazwisko, int wiek) {
-        super(imie, nazwisko, wiek);
-    }
-    
+public class Globalne {
+    public static String idpra;
+    public static AnchorPane pane;
 }
