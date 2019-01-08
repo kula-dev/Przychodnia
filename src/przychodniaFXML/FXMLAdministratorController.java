@@ -177,21 +177,24 @@ public class FXMLAdministratorController implements Initializable {
     //button'y
     @FXML
     private void pracownikadd(ActionEvent event) {
-        if(imieadd.getText().isEmpty() == true || nazwiskoadd.getText().isEmpty() == true 
-           || loginadd.getText().isEmpty() == true || hasloadd.getText().isEmpty() == true)
+        if(checklogin(loginadd.getText()))
         {
-            alertaddpola.setVisible(true);
-        }
-        else
-        {
-            p = new Pracownik(imieadd.getText(), nazwiskoadd.getText(), rola.getValue(), loginadd.getText(), hasloadd.getText());
-            pmysql.insert(p);
-            alert(alertpraadd);
-            alertaddpola.setVisible(false);
-            imieadd.clear();
-            nazwiskoadd.clear();
-            loginadd.clear();
-            hasloadd.clear();
+            if(imieadd.getText().isEmpty() == true || nazwiskoadd.getText().isEmpty() == true 
+               || loginadd.getText().isEmpty() == true || hasloadd.getText().isEmpty() == true)
+            {
+                alertaddpola.setVisible(true);
+            }
+            else
+            {
+                p = new Pracownik(imieadd.getText(), nazwiskoadd.getText(), rola.getValue(), loginadd.getText(), hasloadd.getText());
+                pmysql.insert(p);
+                alert(alertpraadd);
+                alertaddpola.setVisible(false);
+                imieadd.clear();
+                nazwiskoadd.clear();
+                loginadd.clear();
+                hasloadd.clear();
+            }
         }
     }
 
@@ -246,20 +249,49 @@ public class FXMLAdministratorController implements Initializable {
 
     @FXML
     private void editimienaz(ActionEvent event) {
-        p.setImie(editimie.getText());
-        p.setNazwisko(editnazwisko.getText());
-        pmysql.update(p);
-        alert(alertpraeditdane);
+        if(editimie.getText().isEmpty() || editnazwisko.getText().isEmpty())
+        {
+            
+        }
+        else
+        {
+            p.setImie(editimie.getText());
+            p.setNazwisko(editnazwisko.getText());
+            pmysql.update(p);
+            alert(alertpraeditdane);
+        }
     }
 
     @FXML
     private void editloghas(ActionEvent event) {
-        p.setLogin(editlogin.getText());
-        p.setHaslo(edithaslo.getText());
-        pmysql.update(p);
-        alert(alertpraeditlog);
+        if(checklogin(editlogin.getText()))
+        {
+            if(editlogin.getText().isEmpty() || edithaslo.getText().isEmpty())
+            {
+
+            }
+            else
+            {
+                p.setLogin(editlogin.getText());
+                p.setHaslo(edithaslo.getText());
+                pmysql.update(p);
+                alert(alertpraeditlog);
+            }
+        }
     }
 
+    private boolean checklogin(String a){
+        session = HibernateUtil.getSessionFactory().openSession();
+        String hql = "SELECT P.id FROM Pracownik P "
+                + "WHERE P.login = '" + a + "'";
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        if(results.isEmpty())
+            return true;
+        else
+            return false;
+    }
+    
     private void alert(Label a){
         a.setVisible(true);
         PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));

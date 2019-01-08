@@ -66,6 +66,7 @@ public class FXMLDocumentController implements Initializable {
         session = null;
     }    
 
+    @FXML
     private void close(ActionEvent event) {
         Platform.exit();
     }
@@ -94,10 +95,10 @@ public class FXMLDocumentController implements Initializable {
             else
             {
                 p = (Pracownik) session.get(Pracownik.class, (Integer)query.list().get(0));
-                System.out.println(p);
+                
                 session.close();
                 AnchorPane pane;
-                System.out.println(p.getRola().equals("Admin"));
+                //Globalne.pane;
                 
                 if(p.getRola().equals("Admin"))
                     pane = FXMLLoader.load(getClass().getResource("FXMLAdministrator.fxml"));

@@ -150,6 +150,12 @@ public class FXMLPielegniarkaController implements Initializable {
     private Label alertpacedit;
     @FXML
     private Label alertpacadd;
+    @FXML
+    private Label alertpeseladd;
+    @FXML
+    private Label alertpacpola;
+    @FXML
+    private Label alertwizdel;
 
     /**
      * Initializes the controller class.
@@ -259,25 +265,58 @@ public class FXMLPielegniarkaController implements Initializable {
     
     @FXML
     private void addpacjent(ActionEvent event) {
-        if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null || peseladd.getText() == null)
+        session = HibernateUtil.getSessionFactory().openSession();
+
+        String hql = "SELECT P.id FROM Pacjent P WHERE P.pesel = '" + peseladd.getText() + "'";
+        
+        Query query = session.createQuery(hql);
+        List results = query.list();
+        if(results.isEmpty() && peselcheck())
         {
-            System.out.println("wypełnij wszystkie pola");
+            if(imieadd.getText() == null || nazwiskoadd.getText() == null || wiekadd.getValue() == null || peseladd.getText() == null)
+            {
+               alert(alertpacpola);
+            }
+            else
+            {
+                pa = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()), Long.parseLong(peseladd.getText()));
+                pamysql.insert(pa);
+                alert(alertpacadd);
+                imieadd.clear();
+                nazwiskoadd.clear();
+                wiekadd.getEditor().clear();
+                peseladd.clear();
+            }
         }
         else
         {
-            pa = new Pacjent(imieadd.getText(), nazwiskoadd.getText(), Date.valueOf(wiekadd.getValue()), Long.parseLong(peseladd.getText()));
-            pamysql.insert(pa);
+            alert(alertpeseladd);
         }
+    }
+    
+    private boolean peselcheck(){
+        String pesel = peseladd.getText();
+        if(pesel.length() == 11)
+            return true;
+        else
+            return false;
     }
 
     @FXML
     private void pacjentedit(ActionEvent event) {
-        pa.setImie(imieedit.getText());
-        pa.setNazwisko(nazwiskoedit.getText());
-        pa.setDataUr(Date.valueOf(datauredit.getValue()));
-        pa.setPesel(Long.parseLong(peseledit.getText()));
-        pamysql.update(pa);
-        alert(alertpacedit);
+        if(imieedit.getText().isEmpty() || nazwiskoedit.getText().isEmpty() || datauredit.getEditor().getText().isEmpty() || peseledit.getText().isEmpty())
+        {
+            
+        }
+        else
+        {
+            pa.setImie(imieedit.getText());
+            pa.setNazwisko(nazwiskoedit.getText());
+            pa.setDataUr(Date.valueOf(datauredit.getValue()));
+            pa.setPesel(Long.parseLong(peseledit.getText()));
+            pamysql.update(pa);
+            alert(alertpacedit);
+        }
     }
     
     @FXML
@@ -306,8 +345,8 @@ public class FXMLPielegniarkaController implements Initializable {
         }
         else
         {
-            System.out.println(tablewizyty.getSelectionModel().getSelectedItem());
             wizmysql.delete(tablewizyty.getSelectionModel().getSelectedItem());
+            alert(alertwizdel);
             wizytyshow();
         }
     }
@@ -399,6 +438,23 @@ public class FXMLPielegniarkaController implements Initializable {
             tablepacjent.getItems().add(pa);
         }
         session.close();
+    }
+
+    @FXML
+    private void peseldata(ActionEvent event) {
+        String data = wiekadd.getEditor().getText();
+        String datacheck = data.substring(6, 8);
+        int a = Integer.parseInt(data.substring(3,5));
+
+        if(datacheck.equals("19"))
+        {
+            datacheck = data.substring(8) + data.substring(3,5) + data.substring(0,2);  
+        }
+        else if(datacheck.equals("20"))
+        {
+            datacheck = data.substring(8) + String.valueOf(a + 20) + data.substring(0,2);  
+        }
+        peseladd.setText(datacheck);
     }
 
 }

@@ -6,6 +6,7 @@
 package przychodnia;
 
 import java.util.Set;
+import javafx.scene.layout.AnchorPane;
 
 /**
  *
@@ -13,5 +14,5 @@ import java.util.Set;
  */
 public class Globalne {
     public static String idpra;
-    
+    public static AnchorPane pane;
 }

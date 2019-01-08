@@ -279,11 +279,18 @@ public class FXMLLekarzController implements Initializable {
 
     @FXML
     private void choredit(ActionEvent event) {
-        kar.setChoroba(choreditnaz.getText());
-        kar.setOpis(choreditopis.getText());
-        karmysql.update(kar);
-        //alertedit.setVisible(true);
-        alert(alertedit);
+        if(choreditnaz.getText().isEmpty() || choreditopis.getText().isEmpty())
+        {
+            
+        }
+        else
+        {
+            kar.setChoroba(choreditnaz.getText());
+            kar.setOpis(choreditopis.getText());
+            karmysql.update(kar);
+            //alertedit.setVisible(true);
+            alert(alertedit);
+        }
     }
 
     @FXML
